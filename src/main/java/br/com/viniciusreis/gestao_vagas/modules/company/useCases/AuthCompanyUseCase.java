@@ -2,6 +2,7 @@ package br.com.viniciusreis.gestao_vagas.modules.company.useCases;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Arrays;
 
 import javax.security.sasl.AuthenticationException;
 
@@ -49,6 +50,7 @@ public class AuthCompanyUseCase {
     var token = JWT.create().withIssuer("javagas")
                   .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
                   .withSubject(company.getId().toString())
+                  .withClaim("roles", Arrays.asList("COMPANY"))
                   .sign(algorithm);
     return token;
   }
